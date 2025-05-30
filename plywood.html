@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plywood Products - Shabbir Traders</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <style>
+        .products-section {
+            padding: 6rem 0;
+            background: var(--light-gray);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        
+        .product-card {
+            position: relative;
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(139, 115, 85, 0.1);
+            transition: var(--transition);
+            text-align: center;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(139, 115, 85, 0.2);
+        }
+
+        .category-slider {
+            height: 300px;
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            background: #f8f8f8;
+            position: relative;
+        }
+
+        .category-slider .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-slider .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .category-slider .swiper-slide-active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .category-slider .swiper-slide-prev,
+        .category-slider .swiper-slide-next {
+            opacity: 0.7;
+        }
+
+        .category-slider .swiper-button-next,
+        .category-slider .swiper-button-prev {
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .category-slider .swiper-button-next:after,
+        .category-slider .swiper-button-prev:after {
+            font-size: 1.2rem;
+        }
+
+        .category-slider .swiper-pagination {
+            bottom: 10px;
+        }
+
+        .category-slider .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .category-slider .swiper-pagination-bullet-active {
+            background: var(--primary-color);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            background: var(--white);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .product-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .product-info p {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .page-hero {
+            margin-top: 90px;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                margin-top: 70px;
+            }
+            
+            .products-grid {
+                padding: 1rem;
+            }
+            
+            .product-card {
+                height: auto;
+                min-height: 450px;
+            }
+            
+            .category-slider {
+                height: 250px;
+            }
+            
+            .product-info {
+                padding: 1rem;
+            }
+            
+            .product-info h3 {
+                font-size: 1.3rem;
+            }
+            
+            .product-info p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-color);
+        }
+
+        .modal-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-image-container {
+            width: 100%;
+            height: 400px;
+            background: #f8f8f8;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .modal-slider {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-slider .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-slider .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .modal-details h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-details p {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .specs-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .specs-list li {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .header-large {
+            padding: 0.3rem 0;
+        }
+
+        .header-large .logo-large img {
+            max-height: 50px;
+        }
+
+        .nav-container {
+            padding: 0.2rem 0;
+        }
+
+        .nav-container .logo-small img {
+            max-height: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .logo-large img {
+                max-height: 45px;
+            }
+            
+            .logo-small img {
+                max-height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-large">
+            <div class="container">
+                <div class="logo-large">
+                    <a href="index.html">
+                        <img src="Logo2.png" alt="Shabbir Traders Logo">
+                    </a>
+                </div>
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html" class="active">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+        <div class="nav-container">
+            <div>
+                <div class="logo-small">
+                    <a href="index.html">
+                        <img src="Logo.PNG" alt="Shabbir Traders Logo">
+                    </a>
+                </div>
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html" class="active">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero" id="plywood">
+        <img src="Plywoodprofile.jpg" alt="Plywood Collection" class="hero-image-size">
+        <div class="hero-content">
+            <h1>Plywood Collection</h1>
+            <p>Premium Quality Plywood for Every Need</p>
+        </div>
+    </section>
+
+    <!-- Product Category Navigation -->
+    <div class="category-nav">
+        <a href="plywood.html" class="category-btn active">Plywood</a>
+        <a href="flushdoor.html" class="category-btn">Flush Doors</a>
+        <a href="laminates.html" class="category-btn">Laminates</a>
+        <a href="handles.html" class="category-btn">Handles</a>
+        <a href="hardware.html" class="category-btn">Hardware</a>
+    </div>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-grid">
+                <!-- GRADO GOLD -->
+                <div class="product-card">
+                    <div class="swiper category-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="GRADO1.jpg" alt="GRADO GOLD">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="GRADO GOLD.png" alt="GRADO GOLD">
+                            </div>
+                            
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>GRADO GOLD</h3>
+                        <p>Premium quality plywood</p>
+                        <button class="cta-button" onclick="openModal('gradogold')">Click to know more</button>
+                    </div>
+                </div>
+
+                <!-- MISSILE -->
+                <div class="product-card">
+                    <div class="swiper category-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="MISSILE1.jpg" alt="MISSILE">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="MISSILE.png" alt="MISSILE">
+                            </div>
+                            
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>MISSILE</h3>
+                        <p>High-performance plywood</p>
+                        <button class="cta-button" onclick="openModal('missile')">Click to know more</button>
+                    </div>
+                </div>
+
+                <!-- PANTOP -->
+                <div class="product-card">
+                    <div class="swiper category-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="PANTOP1.jpg" alt="PANTOP">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="PANTOP.png" alt="PANTOP">
+                            </div>
+                            
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>PANTOP</h3>
+                        <p>Versatile plywood solution</p>
+                        <button class="cta-button" onclick="openModal('pantop')">Click to know more</button>
+                    </div>
+                </div>
+
+                <!-- SEIZE -->
+                <div class="product-card">
+                    <div class="swiper category-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="SEIZE.jpg" alt="SEIZE">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="SEIZE.png" alt="SEIZE">
+                            </div>
+                            
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3>SEIZE</h3>
+                        <p>Durable plywood for all needs</p>
+                        <button class="cta-button" onclick="openModal('seize')">Click to know more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-content" id="modalContent">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="Logo.PNG" alt="Shabbir Traders" class="footer-logo">
+                    <p>Your trusted partner in quality plywood and hardware</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +0731-4222677</p>
+                    <p><i class="fas fa-mobile"></i> +91 9009566052</p>
+                    <p><i class="fas fa-envelope"></i> shabbir.traders.352@gmail.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="https://wa.me/919009566052" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/shabbir_traders_indore/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Shabbir Traders - All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        const productData = {
+            gradogold: {
+                name: "GRADO GOLD",
+                description: "Premium quality plywood engineered for superior strength and durability. Perfect for high-end furniture and interior applications.",
+                price: "₹120 - ₹150 per sq ft",
+                image: "GRADO1.jpg",
+                images: ["GRADO1.jpg", "GRADO GOLD.png"],
+                specs: [
+                    "Thickness: 6mm to 25mm",
+                    "Core: Hardwood",
+                    "Bonding: BWP Grade",
+                    "Warranty: Lifetime",
+                    "Applications: Furniture, Cabinets, Doors"
+                ]
+            },
+            missile: {
+                name: "MISSILE",
+                description: "High-performance plywood designed for demanding applications. Features exceptional strength and moisture resistance.",
+                price: "₹100 - ₹130 per sq ft",
+                image: "MISSILE1.jpg",
+                images: ["MISSILE1.jpg", "MISSILE.png"],
+                specs: [
+                    "Thickness: 8mm to 19mm",
+                    "Core: Selected Hardwood",
+                    "Bonding: BWR Grade",
+                    "Warranty: 10 years",
+                    "Applications: Commercial Interiors, Heavy Furniture"
+                ]
+            },
+            pantop: {
+                name: "PANTOP",
+                description: "Versatile plywood solution suitable for various applications. Combines quality with affordability.",
+                price: "₹90 - ₹110 per sq ft",
+                image: "PANTOP1.jpg",
+                images: ["PANTOP1.jpg", "PANTOP.png"],
+                specs: [
+                    "Thickness: 6mm to 18mm",
+                    "Core: Mixed Hardwood",
+                    "Bonding: MR Grade",
+                    "Warranty: 7 years",
+                    "Applications: General Purpose, Interior Work"
+                ]
+            },
+            seize: {
+                name: "SEIZE",
+                description: "Durable plywood designed for everyday applications. Offers reliable performance at competitive prices.",
+                price: "₹80 - ₹100 per sq ft",
+                image: "SEIZE.jpg",
+                images: ["SEIZE.jpg", "SEIZE.png"],
+                specs: [
+                    "Thickness: 6mm to 18mm",
+                    "Core: Mixed Hardwood",
+                    "Bonding: MR Grade",
+                    "Warranty: 5 years",
+                    "Applications: Basic Furniture, Storage Units"
+                ]
+            }
+        };
+
+        function openModal(productId) {
+            const product = productData[productId];
+            const modalContent = document.getElementById('modalContent');
+            const whatsappMessage = encodeURIComponent(`Hi, I'm interested in ${product.name} plywood. Please provide more information.`);
+            modalContent.innerHTML = `
+                <div class="modal-image-container">
+                    <div class="swiper modal-slider">
+                        <div class="swiper-wrapper">
+                            ${product.images.map(img => `
+                                <div class="swiper-slide">
+                                    <img src="${img}" alt="${product.name}">
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+                <div class="modal-details">
+                    <h2>${product.name}</h2>
+                    <p>${product.description}</p>
+                    <a href="https://wa.me/919009566052?text=${whatsappMessage}" target="_blank" class="cta-button" style="display: inline-block; text-decoration: none; margin-top: 1rem;">Enquire Now</a>
+                    <h3>Specifications:</h3>
+                    <ul class="specs-list">
+                        ${product.specs.map(spec => `<li>${spec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Initialize modal slider with a slight delay to ensure DOM is ready
+            setTimeout(() => {
+                const modalSlider = new Swiper('.modal-slider', {
+                    effect: 'slide',
+                    loop: true,
+                    speed: 500,
+                    autoplay: {
+                        delay: 2000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: false,
+                    },
+                    pagination: {
+                        el: '.modal-slider .swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.modal-slider .swiper-button-next',
+                        prevEl: '.modal-slider .swiper-button-prev',
+                    }
+                });
+                
+                // Force autoplay to start
+                modalSlider.autoplay.start();
+            }, 100);
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize category sliders
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.category-slider').forEach(slider => {
+                new Swiper(slider, {
+                    effect: 'slide',
+                    loop: true,
+                    speed: 800,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    centeredSlides: true,
+                    pagination: {
+                        el: slider.querySelector('.swiper-pagination'),
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: slider.querySelector('.swiper-button-next'),
+                        prevEl: slider.querySelector('.swiper-button-prev'),
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html> 

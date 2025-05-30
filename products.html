@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products - Shabbir Traders</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <style>
+        .product-categories {
+            padding: 2rem 0 0 0;
+            margin: 0;
+            background: var(--light-gray);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            margin-bottom: 0;
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .category-card {
+            position: relative;
+            height: 500px;
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(139, 115, 85, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(139, 115, 85, 0.2);
+        }
+
+        .category-slider {
+            height: 250px;
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+
+        .category-slider .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: var(--white);
+        }
+
+        .category-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .category-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+        }
+
+        .category-content ul li {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .category-content .cta-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: auto;
+        }
+
+        .category-content .cta-button:hover {
+            background: var(--accent-color);
+        }
+
+        .category-slider .swiper-pagination-bullet-active {
+            background: var(--primary-color);
+        }
+
+        .product-gallery {
+            padding: 0;
+            margin: 0;
+            background: var(--light-gray);
+        }
+
+        .product-gallery .container {
+            padding-top: 0;
+        }
+
+        .product-gallery h2 {
+            margin: 0;
+            padding: 0.5rem 2rem;
+        }
+
+        .product-gallery .product-slider {
+            margin-top: 0.5rem;
+        }
+
+        .product-gallery .swiper-slide {
+            padding: 0.5rem;
+        }
+
+        .product-categories h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        /* Create a wrapper for both sections */
+        .products-wrapper {
+            background: var(--light-gray);
+            padding-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .category-card {
+                height: auto;
+                min-height: 450px;
+            }
+
+            .category-slider {
+                height: 200px;
+            }
+
+            .category-content {
+                padding: 1rem;
+            }
+
+            .category-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .category-content ul li {
+                font-size: 1rem;
+            }
+
+            .category-content .cta-button {
+                padding: 0.7rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Remove any potential gaps */
+        section {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <!-- Large Header -->
+        <div class="header-large">
+            <div class="container">
+                <div class="logo-large">
+                    <a href="index.html">
+                        <img src="Logo2.png" alt="Shabbir Traders Logo">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html" class="active">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+        <!-- Small Header (Navigation) -->
+        <nav class="nav-container">
+            <div>
+                <div class="logo-small">
+                    <a href="index.html">
+                        <img src="Logo.PNG" alt="Shabbir Traders Logo">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html" class="active">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero" id="products">
+        <img src="productshero.png" alt="Our Products" class="hero-image-size">
+        <div class="hero-content">
+            <h1>Our Products</h1>
+            <p>Discover Our Wide Range of Quality Materials</p>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <div class="products-wrapper">
+        <section class="product-categories">
+            <div class="container">
+                <h2>Product Categories</h2>
+                <div class="category-grid">
+                    <!-- 1. PLYWOOD -->
+                    <a href="plywood.html" class="category-link">
+                        <div class="category-card">
+                            <div class="swiper category-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="GRADO GOLD.png" alt="Plywood Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="MISSILE.png" alt="Plywood Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="PANTOP.png" alt="Plywood Category">
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <div class="category-content">
+                                <div>
+                                    <h3>Plywood</h3>
+                                    <ul>
+                                        <li>GRADO GOLD</li>
+                                        <li>MISSILE</li>
+                                        <li>And many more</li>
+                                    </ul>
+                                </div>
+                                <button class="cta-button">Click to know more</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 2. FLUSH DOORS -->
+                    <a href="flushdoor.html" class="category-link">
+                        <div class="category-card">
+                            <div class="swiper category-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="flushdoor1.jpg" alt="Flush Doors">
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <div class="category-content">
+                                <div>
+                                    <h3>Flush Doors</h3>
+                                    <ul>
+                                        <li>Premium Quality Wood</li>
+                                        <li>Multiple Finishes</li>
+                                        <li>Custom Sizes Available</li>
+                                    </ul>
+                                </div>
+                                <button class="cta-button">Click to know more</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 3. LAMINATES -->
+                    <a href="laminates.html" class="category-link">
+                        <div class="category-card">
+                            <div class="swiper category-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="Sunmica1.jpg" alt="Plywood Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="Sunmica2.jpg" alt="Plywood Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="sunmica 3.jpg" alt="Plywood Category">
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <div class="category-content">
+                                <div>
+                                    <h3>Laminates</h3>
+                                    <ul>
+                                        <li>Sunmica</li>
+                                        <li>Acrylic Sunmica</li>
+                                        <li>And many more</li>
+                                    </ul>
+                                </div>
+                                <button class="cta-button">Click to know more</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 4. HANDLES -->
+                    <a href="handles.html" class="category-link">
+                        <div class="category-card">
+                            <div class="swiper category-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="Handles2.jpg" alt="Handles Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="Handles3.jpg" alt="Handles Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="Handles1.jpg" alt="Handles Category">
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <div class="category-content">
+                                <div>
+                                    <h3>Furniture Handles</h3>
+                                    <ul>
+                                        <li>CABINET HANDLES</li>
+                                        <li>MAINDOOR HANDLES</li>
+                                        <li>And many more</li>
+                                    </ul>
+                                </div>
+                                <button class="cta-button">Click to know more</button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 5. HARDWARE -->
+                    <a href="hardware.html" class="category-link">
+                        <div class="category-card">
+                            <div class="swiper category-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="tandem box 1.jpg" alt="Hardware Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="Door kit 1.jpg" alt="Hardware Category">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="slim box 1.jpg" alt="Hardware Category">
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <div class="category-content">
+                                <div>
+                                    <h3>Hardware</h3>
+                                    <ul>
+                                        <li>HINGES</li>
+                                        <li>MORTISED LOCKS</li>
+                                        <li>And many more</li>
+                                    </ul>
+                                </div>
+                                <button class="cta-button">Click to know more</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Gallery -->
+        <section class="product-gallery">
+            <div class="container">
+                <h2>Product Gallery</h2>
+                <div class="swiper product-slider">
+                    <div class="swiper-wrapper">
+                        <!-- Plywood -->
+                        <div class="swiper-slide">
+                            <img src="GRADO1.jpg" alt="GRADO GOLD Plywood">
+                            <h3>GRADO GOLD Plywood</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="MISSILE1.jpg" alt="MISSILE Plywood">
+                            <h3>MISSILE Plywood</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="PANTOP1.jpg" alt="PANTOP Plywood">
+                            <h3>PANTOP Plywood</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="SEIZE.jpg" alt="SEIZE Plywood">
+                            <h3>SEIZE Plywood</h3>
+                        </div>
+                        <!-- Flush Doors -->
+                        <div class="swiper-slide">
+                            <img src="flushdoor1.jpg" alt="Premium Flush Door">
+                            <h3>Premium Flush Door</h3>
+                        </div>
+                        <!-- Laminates -->
+                        <div class="swiper-slide">
+                            <img src="sunmica1.jpg" alt="Premium Sunmica">
+                            <h3>Premium Sunmica</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="Louvers1.png" alt="Designer Louvers">
+                            <h3>Designer Louvers</h3>
+                        </div>
+                        <!-- Handles -->
+                        <div class="swiper-slide">
+                            <img src="Cabinet handel 1.jpg" alt="Cabinet Handles">
+                            <h3>Cabinet Handles</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="Main door Handel 1 .jpg" alt="Main Door Handles">
+                            <h3>Main Door Handles</h3>
+                        </div>
+                        <!-- Hardware -->
+                        <div class="swiper-slide">
+                            <img src="Mortised lock1.jpg" alt="Mortised Locks">
+                            <h3>Mortised Locks</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="Door kit 1.jpg" alt="Door Kits">
+                            <h3>Door Kits</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="kitchen trolly 1.jpg" alt="Kitchen Trolley">
+                            <h3>Kitchen Trolley</h3>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="tandem box 1.jpg" alt="Tandem Box">
+                            <h3>Tandem Box</h3>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="Logo.PNG" alt="Shabbir Traders" class="footer-logo">
+                    <p>Your trusted partner in quality plywood and hardware</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +0731-4222677</p>
+                    <p><i class="fas fa-mobile"></i> +91 9009566052</p>
+                    <p><i class="fas fa-envelope"></i> shabbir.traders.352@gmail.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="https://wa.me/919009566052" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/shabbir_traders_indore/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Shabbir Traders - All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+        // Initialize category card sliders
+        document.querySelectorAll('.category-slider').forEach(slider => {
+            new Swiper(slider, {
+                effect: 'slide',
+                loop: true,
+                speed: 500,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: false,
+                },
+                pagination: {
+                    el: slider.querySelector('.swiper-pagination'),
+                    clickable: true,
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Shabbir Traders</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .contact-page {
+            padding: 2rem 0;
+            background: var(--light-gray);
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .map-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .map-container {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 500px;
+            margin-top: 2rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .social-connect {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+
+        .social-connect h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons-large {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-icons-large a {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons-large a:hover {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 992px) {
+            .contact-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 400px;
+            }
+        }
+
+        .header-large {
+            padding: 0.3rem 0;
+        }
+
+        .header-large .logo-large img {
+            max-height: 50px;
+        }
+
+        .nav-container {
+            padding: 0.2rem 0;
+        }
+
+        .nav-container .logo-small img {
+            max-height: 35px;
+        }
+
+        .page-hero {
+            margin-top: 90px;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                margin-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <!-- Large Header -->
+        <div class="header-large">
+            <div class="container">
+                <div class="logo-large">
+                    <a href="index.html">
+                        <img src="Logo2.png" alt="Shabbir Traders Logo">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html" class="active">Contact</a>
+                </div>
+            </div>
+        </div>
+        <!-- Small Header (Navigation) -->
+        <nav class="nav-container">
+            <div>
+                <div class="logo-small">
+                    <a href="index.html">
+                        <img src="Logo.PNG" alt="Shabbir Traders Logo">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html" class="active">Contact</a>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero" id="contact">
+        <img src="Contactprofile.jpg" alt="Contact Us" class="hero-image-size">
+        <div class="hero-content">
+            <h1>Contact Us</h1>
+            <p>Get in Touch with Our Team</p>
+        </div>
+    </section>
+
+    <!-- Contact Info Cards -->
+    <section class="contact-page">
+        <div class="contact-cards">
+            <div class="info-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Visit Our Store</h3>
+                <p>Shabbir Traders, Jawahar Marg,<br>North Hathipala, Siyaganj,<br>Indore, Madhya Pradesh</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Call Us</h3>
+                <p>Office: +0731-4222677</p>
+                <p>Mr. Moiz: +91 9009566052</p>
+                <p>Mr. Taher: +91 9826099487</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Us</h3>
+                <p>shabbir.traders.352@gmail.com</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-clock"></i>
+                <h3>Business Hours</h3>
+                <p>Monday - Saturday</p>
+                <p>10:30 am – 09:00 pm</p>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.2887485496178!2d75.86291431492947!3d22.716313385610716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd09e6aaa18f%3A0x57a41323863cbc07!2sShabbir%20Traders!5e0!3m2!1sen!2sin!4v1635825247000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <!-- Social Connect -->
+        <div class="social-connect">
+            <h2>Connect With Us</h2>
+            <div class="social-icons-large">
+                <a href="https://wa.me/919009566052" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/shabbir_traders_indore/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img src="Logo.PNG" alt="Shabbir Traders" class="footer-logo">
+                    <p>Your trusted partner in quality plywood and hardware</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +0731-4222677</p>
+                    <p><i class="fas fa-mobile"></i> +91 9009566052</p>
+                    <p><i class="fas fa-envelope"></i> shabbir.traders.352@gmail.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="https://wa.me/919009566052" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/shabbir_traders_indore/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Shabbir Traders - All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html> 

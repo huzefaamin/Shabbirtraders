@@ -97,17 +97,93 @@ body {
 
 /* Mobile Styles for Large Header */
 @media (max-width: 768px) {
+    .header-large .container {
+        padding: 0.5rem 1rem;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
     .header-large .nav-links {
         display: none; /* Hide navigation in large header on mobile */
     }
     
-    .header-large {
-        padding: 1rem 0;
-    }
-    
     .logo-large img {
-        width: 180px;
         height: 45px;
+        width: auto;
+    }
+
+    .nav-container {
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        padding: 0.8rem 0;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        color: var(--primary-color);
+    }
+
+    .mobile-menu.active i {
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .header-large .container {
+        padding: 0.3rem 0.8rem;
+    }
+
+    .logo-large img {
+        height: 40px;
+    }
+
+    .nav-container {
+        padding: 0.3rem 0.8rem;
+    }
+
+    .nav-links {
+        top: 65px;
+        padding: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+        padding: 0.7rem 0;
     }
 }
 
